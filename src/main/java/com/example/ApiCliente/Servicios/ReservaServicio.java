@@ -43,8 +43,12 @@ public class ReservaServicio {
         }
     }
 
-    public ReservaModelo updateReserva(ReservaModelo reserva){
-        return repo.save(reserva);
+    public ReservaModelo updateReserva(long id, ReservaModelo reserva){
+         var vari = repo.findById(id);
+        repo.deleteById(id);
+        reserva.setId(id);
+       return repo.save(reserva);
+       
     }
     
 }

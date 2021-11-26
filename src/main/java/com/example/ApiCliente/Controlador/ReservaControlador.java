@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 @RestController
-//@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
+@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PUT})
 @RequestMapping("/reserva")
 public class ReservaControlador {
-
+    
     @Autowired
     ReservaServicio servicio;
 
@@ -49,9 +52,9 @@ public class ReservaControlador {
         return servicio.deleteReserva(id);
     }
 
-    @PutMapping()
-    public ReservaModelo updateReserva(@RequestBody ReservaModelo reserva){
-        return servicio.updateReserva(reserva);
+    @PutMapping(path = "/{id}")
+    public ReservaModelo updateReserva(@PathVariable("id") Long id, @RequestBody ReservaModelo reserva){
+        return servicio.updateReserva(id, reserva);
     }
 
 
